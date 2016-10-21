@@ -1,0 +1,23 @@
+--- 
+# These buildings are all ones which appear in the file buildings_occupancy.csv
+# but whic do not appear int the file bike_racks.csv. In order to approximate 
+# the entrace locations for buildings, the existing bike rack locations are 
+# used. These provide estimations of entrance locations for buildings which
+# do not currently appear to have any racks associated with them.
+motr: 
+- lon: -111.046213
+  lat: 45.658769
+  racks: 0 
+  cap: 0 
+
+culbertson: 
+- lon: -111.046213
+  lat: 45.670323 
+  racks: 0 
+  cap: 0 
+
+montana hall: 
+- lon: -111.049338
+  lat: 45.6667639 
+  racks: 0 
+  cap: 0 

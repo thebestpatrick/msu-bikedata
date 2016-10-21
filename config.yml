@@ -1,0 +1,98 @@
+###############################################################################
+# Copyright 2015-2016 Patrick Ingham - License: BSD 2-Clause License 
+# 
+# This file is a part of msu-bikedata, which currently licensed for public
+# use and distribution under terms of the BSD License. Refer to the 'License'
+# section of README.md in the project root directory file for full copyright 
+# information. 
+# 
+###############################################################################
+# 
+# This is a configuration file, written in yaml. The syntax should be fairly 
+# intuitive, and most values can be changed. It is unwise, however, to push 
+# things too far, as this can lead to unexpected results. The amount of testing 
+# allowed in 2 weeks is relatively minimal. 
+# 
+###############################################################################
+--- 
+number of bikes: 1500  # random starting guess. 
+optimizing cycles: 35
+
+# Seed numbers taken from https://en.wikipedia.org/wiki/List_of_French_monarchs
+rand seeds: [481, 511, 533, 547, 555, 524, 558, 561, 567, 592, 575, 595, 612, 
+  613, 584, 629, 639, 673, 675, 691, 695, 711, 715, 721, 751, 898, 771, 814, 
+  840, 877, 879, 882] 
+
+sleep delay: 0.0
+scheduled events: 7
+data directory: data 
+report directory: reports 
+
+rack file: info/bike_racks.csv 
+building file: info/buildings_occupancy.csv
+minimum occupancy: 20 
+entrances file: info/other_entrances.yml 
+
+# will attempt to load compiled data from here, if the file does not exist, a 
+# fresh one will be created. 
+compiled data: data/comp_dat.yml
+
+rack info:  # More types at the site. 
+  - type: cora expo 7510  # http://www.cora.com/bikeparking.htm 
+    length: 1.889125  # meters 
+    width: 0.762  # meters 
+    height: 0.8636  # meters 
+    capacity: 10  # bikes
+    price: 825.00  # dollars 
+  - type: cora expo 4508
+    length: 1.203325
+    width: 0.762 
+    height: 0.8636 
+    capacity: 8
+    price: 715.00  # dollars 
+
+time value: 15  # dollars / hour 
+speed: 4828  # meters / hour (3 miles per hour, approximate walking speed) 
+# value of a meter is 1/(speed in meters/(time value)) gives dollars / meter
+# ~0.0031 dollars per meter given time value = $15 and speed = 4828 meters
+
+moves per cycle: 1  # Number of racks which move per optimization cycle. 
+
+# In order to quickly unify buildings between the occupancy file and the rack 
+# locations file, the following is in the format: name: [list of synonyms, ] 
+# 
+# If you want to add a new building or location, it is important to add it here 
+# first, as well as to the .csv files. 
+building equivalents: 
+  plew: []
+  heating plant: [] 
+  eps: [barnard hall, ]
+  cobleigh: [cobleigh hall, ] 
+  library: [sub, renne library, ] 
+  roberts: [roberts hall, ] 
+  ajmj: [a.j.m. johnson hall, a.j.m. jonhson hall, ] 
+  hamilton: [hamilton hall, ] 
+  montana hall: [] 
+  campus: [] 
+  wilson: [wilson hall, ] 
+  ljh annex: [leon johnson hall, leon johnson, ] 
+  lewis: [lewis hall, ] 
+  sherrick: [sherrick hall, ] 
+  reid: [reid hall, traphagen hall, ] 
+  gaines: [gaines hall, ] 
+  romney: [romney gym, ] 
+  viscom: [visual communication, black box theatre, ] 
+  howard: [howard hall, ] 
+  cheever: [cheever hall, ] 
+  haynes: [haynes hall, ] 
+  taylor: [taylor hall, cooley, ] 
+  linfield: [linfield hall, linfield south, ] 
+  chem biochem: [chemistry and biochemistry research, ] 
+  jabs: [jabs hall, ] 
+  herrick: [herrick hall, ] 
+  hpe: [marga hosaeus fitness center, ] 
+  fieldhouse: [stadium, ] 
+  abb: [animal biosciences, ] 
+  pgc: [plant growth center, plant biosciences] 
+  culbertson: [culbertson hall, ] 
+  motr: [museum of the rockies, ] 
