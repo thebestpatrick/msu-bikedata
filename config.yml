@@ -19,10 +19,12 @@ number of bikes: 1500  # random starting guess.
 optimizing cycles: 35
 
 # Seed numbers taken from https://en.wikipedia.org/wiki/List_of_French_monarchs
-rand seeds: [481, 511, 533, 547, 555, 524, 558, 561, 567, 592, 575, 595, 612, 
-  613, 584, 629, 639, 673, 675, 691, 695, 711, 715, 721, 751, 898, 771, 814, 
-  840, 877, 879, 882] 
-
+# currently on 613
+rand seeds: [481, 511, 533, 547, 555, 524, 558, 561, 567, 
+    592, 575, 595, 612, 613]
+    # 584, 629, 639, 673, 675, 691, 695, 711, 715, 721, 751, 898, 771, 814, 
+    # 840, 877, 879, 882] 
+ 
 sleep delay: 0.0
 scheduled events: 7
 data directory: data 
@@ -61,8 +63,12 @@ moves per cycle: 1  # Number of racks which move per optimization cycle.
 # In order to quickly unify buildings between the occupancy file and the rack 
 # locations file, the following is in the format: name: [list of synonyms, ] 
 # 
+# Some of these are not directly synonyms, but rather are buildings found in 
+# one file only and then merged with a different but nearby building in the 
+# other to make certain logic make sense. 
+# 
 # If you want to add a new building or location, it is important to add it here 
-# first, as well as to the .csv files. 
+# first, as well as to the .csv file(s). 
 building equivalents: 
   plew: []
   heating plant: [] 

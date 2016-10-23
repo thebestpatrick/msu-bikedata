@@ -127,6 +127,7 @@ def visualize_all(data, out_dir, field='ex_dist'):
     filename = os.path.join(out_dir, '{}_graph.png'.format(field)) 
     plt.savefig(filename, pad_inches=0.1, bbox_inches='tight', orientation='landscape', 
             figsize=(10.8, 7.2), dpi=100) 
+    plt.close('all') 
     #plt.show() 
 
 

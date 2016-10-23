@@ -18,6 +18,16 @@ Once each Rider has navigated through their entire schedule, an optimization alg
 
 ## Files 
 
+### Code Files 
+
+Located in the project root directory, these files contain the actual Python code which composes the algorithm. 
+
+* montesim.py is the main file, it creates the monte carlo simulation of the campus and calls all other files in time. This central file controls ordering, configuration loading, and acts as a main information pathway. 
+* compiledata.py processes the .csv files from the info/ directory and turns them into a unified dictionary of values which can be used by the rest of the program. 
+* obsprocrep.py is an intermediate file which processes raw algorithm data into an internal summary to be passed to the optimization functions. 
+* procopt.py handles the main optimization after the monte carlo simulation, moving racks around in order to find an optimal configuration. 
+* visrep.py creates visualizations and reports intended for people to read and act upon. 
+
 ### Input Files 
 
 Located in the *info/* folder within the project root directory

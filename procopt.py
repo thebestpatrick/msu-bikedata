@@ -120,6 +120,10 @@ class Pad:
 
     def get_extra_distance(self): 
         return self._extra_distance 
+    
+    
+    def get_rack_count(self): 
+        return self._total_racks  
 
 
     def _get_utilization(self): 
@@ -487,9 +491,9 @@ class CampusLayout:
         fur = self.flatten_utilization(cycles=cycles, max_tries=max_tries)
         
         if outfile is not None:
-            out_dir = os.path.split(outfile) 
-            if not os.path.isdir(out_dir[0]): 
-                os.mkdir(out_dir[0]) 
+            #out_dir = os.path.split(outfile) 
+            #if not os.path.isdir(out_dir[0]): 
+                #os.mkdir(out_dir[0]) 
 
             with open(outfile, 'w') as f: 
                 n = {'flat_dist': fdr, 'flat_util': fur} 
@@ -536,21 +540,46 @@ class CampusLayout:
         return d
 
 
-    def get_current_bike_racks_csv(self, outfile): 
+    def get_current_bike_racks_csv(self, outfile=None): 
         """
         Creates a .csv file for the current arrangement exactly like 
         bike_racks.csv in the info directory 
         """
-        pass 
+        field_names = ['Number of racks', 'Capacity', 'Nearest building', 'x', 
+                'y']  
+        nc = [] 
+        for pad_name in list(self._pads.keys()): 
+            pad = self._pads[pad_name] 
+            c = pad.get_coordinates() 
+            d = {
+                    'Number of racks': pad.get_rack_count(), 
+                    'Capacity': pad.get_capacity(), 
+                    'Nearest building': pad.get_locale(), 
+                    'x': c[0], 
+                    'y': c[1] 
+                }
+            nc.append(d) 
+        
+        if outfile is None: 
+            return nc 
+
+        with open(outfile, 'w') as f: 
+            w = csv.DictWriter(f, field_names) 
+            w.writeheader() 
+            w.writerows(nc) 
+
+            return nc 
 
 
-def sl_exec(info, rep_dat, sched_factor=7, cycle_moves=3, outfile=None): 
+def sl_exec(info, rep_dat, sched_factor=7, cycle_moves=3, 
+        move_outfile=None, csv_outfile=None): 
     #print(info) 
     #print(rep_dat) 
     c = CampusLayout(info, rep_dat, sched_factor) 
     #c.flatten_utilization() 
-    c.optimize_distribution(cycles=cycle_moves, outfile=outfile) 
-    c.new_racks_needed()  # FIXME: this will need config input.  
+    c.optimize_distribution(cycles=cycle_moves, outfile=move_outfile) 
+    c.new_racks_needed()  # FIXME: this will need config input. 
+    c.get_current_bike_racks_csv(csv_outfile) 
     return c.get_current_info_d() 
 
 

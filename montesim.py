@@ -739,6 +739,7 @@ def monte_testing(config_file='config.yml'):
             
             new_dir = os.path.join(data_dir_base, 'seed_{}_cycle_{}'.format(s, opt_cycle))
             report_txt_file = os.path.join(new_dir, 'moves_report.yml') 
+            bike_racks_csv = os.path.join(new_dir, 'new_bike_racks.csv') 
             if not os.path.isdir(new_dir): 
                 os.mkdir(new_dir) 
             cdat_filename = '{}/comp_dat.yml'.format(new_dir)
@@ -753,10 +754,11 @@ def monte_testing(config_file='config.yml'):
             with open(cdat_filename, 'r') as f: 
                 comp_dat2 = yaml.load(f) 
                 comp_dat = procopt.sl_exec(comp_dat2, report_dat, 
-                        sched_events, moves_per_cycle, outfile=report_txt_file) 
+                        sched_events, moves_per_cycle, move_outfile=report_txt_file, 
+                        csv_outfile=bike_racks_csv) 
                 print(']\n') 
 
-        bronzemarsh.inspect_summary_reports(data_dir=data_dir_base, 
+        visrep.inspect_summary_reports(data_dir=data_dir_base, 
                 reports_dir=report_dir, seed_num=s, 
                 max_cycles=(config['optimizing cycles']+1))
 
